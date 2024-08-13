@@ -17,12 +17,18 @@ function submit(){
 function Tong(){
     var SoDuong = 0;
     var tongSoDUong = 0;
-    for(var i = 0; i < numberArr.length; i++){
-        if(numberArr[i] > 0){
-            tongSoDUong += numberArr[i];
-            SoDuong++
+    // for(var i = 0; i < numberArr.length; i++){
+    //     if(numberArr[i] > 0){
+    //         tongSoDUong += numberArr[i];
+    //         SoDuong++
+    //     }
+    // }
+    numberArr.map((num) =>{
+        if(num >0){
+            tongSoDUong += num;
+            SoDuong++;
         }
-    }
+    })
     console.log(numberArr)
     document.getElementById("hienThiTong").innerHTML = tongSoDUong;
     demSoDuong(SoDuong);
@@ -36,13 +42,20 @@ function demSoDuong(SoDuong){
 function soNhoNhat(){
     var minNumber = numberArr[0];
     var minPositiveNumber = numberArr[0];
-    for(var i = 0;i < numberArr.length; i++){
-        if(numberArr[i] < minNumber){
-            minNumber = numberArr[i];
-        }else if(numberArr[i] < minNumber && minPositiveNumber>= 0){
-            minPositiveNumber = numberArr[i];
+    // for(var i = 0;i < numberArr.length; i++){
+    //     if(numberArr[i] < minNumber){
+    //         minNumber = numberArr[i];
+    //     }else if(numberArr[i] < minNumber && minPositiveNumber>= 0){
+    //         minPositiveNumber = numberArr[i];
+    //     }
+    // }
+    numberArr.map((num)=>{
+        if(num < minNumber){
+            minNumber = num;
+        }else if(num < minNumber && minPositiveNumber >=0){
+            minPositiveNumber = num;
         }
-    }
+    })
     console.log(minNumber);
     document.getElementById("hienThiSoNhoNhat").innerHTML = minNumber;
     soDuongNhoNhat(minPositiveNumber)
@@ -53,20 +66,24 @@ function soDuongNhoNhat(minPositiveNumber){
 }
 // tìm số chẵn cuối cùng
 function soChanCuoiCung() {
-    var soChanCuoiCung = -1; 
+    var soChanCuoiCung = 0; 
 
-    for (var i = numberArr.length - 1; i >= 0; i--) { 
-        if (numberArr[i] % 2 === 0) { 
-            soChanCuoiCung = numberArr[i];
-            break; 
-        }else{
-            document.getElementById("hienThiSoChanCuoiCung").innerHTML = -1;
+    // for (var i = numberArr.length - 1; i >= 0; i--) { 
+    //     if (numberArr[i] % 2 === 0) { 
+    //         soChanCuoiCung = numberArr[i];
+    //         break; 
+    //     }else{
+    //         document.getElementById("hienThiSoChanCuoiCung").innerHTML = -1;
+    //     }
+    // }
+    numberArr.forEach((num) => {
+        if (num % 2 === 0) {
+            soChanCuoiCung = num; 
         }
-    }
+    });
 
     document.getElementById("hienThiSoChanCuoiCung").innerHTML = soChanCuoiCung;
     console.log(soChanCuoiCung);
-
 }
 // sắp xếp mảng
 function sapXepTangDan(){
@@ -112,7 +129,7 @@ function timSoNguyenToDauTien() {
             return; 
         }
     }
-    document.getElementById("so-nguyen-to-dau-tien").innerHTML = -1;
+    document.getElementById("so-nguyen-to-dau-tien").innerHTML = "Không có số nguyên tố trong mảng";
 }
 
 //tìm số nguyên
@@ -131,11 +148,16 @@ function addFloat(){
 }
 function timSoNguyen(){
     var soNguyen = 0;
-    for(var i = 0; i<floatArr.length;i++){
-        if(Number.isInteger(floatArr[i])){
+    // for(var i = 0; i<floatArr.length;i++){
+    //     if(Number.isInteger(floatArr[i])){
+    //         soNguyen++;
+    //     }
+    // }
+    floatArr.map((num)=>{
+        if(Number.isInteger(num)){
             soNguyen++;
         }
-    }
+    });
     document.getElementById("so-nguyen").innerHTML = soNguyen;
     console.log(soNguyen);
 }
@@ -144,14 +166,23 @@ function timSoNguyen(){
 function soSanh(){
     soDuong = 0;
     soAm = 0;
-    for( var i = 0; i<numberArr.length; i++){
-        if(numberArr[i]<0){
+    // for( var i = 0; i<numberArr.length; i++){
+    //     if(numberArr[i]<0){
+    //         soAm++;
+    //     }
+    //     if(numberArr[i]>0){
+    //         soDuong++;
+    //     }
+    // }
+    numberArr.map((num) =>{
+        if(num < 0){
             soAm++;
-        }
-        if(numberArr[i]>0){
+            return soAm;
+        }if(num > 0){
             soDuong++;
+            return soDuong;
         }
-    }
+    });
     if(soAm > soDuong){
         document.getElementById("hien-thi-so-sanh").innerHTML = "Số Âm > Số Dương";
     }else if(soAm < soDuong){
